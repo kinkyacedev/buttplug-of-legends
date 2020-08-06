@@ -69,7 +69,7 @@ async def main():
     queue = SimpleQueue()
     lol = League_Thread(queue)
     lol.start()
-    bu = Buttplug_Thread(queue)
+    bu = Buttplug_Thread(queue, chosen_device)
     bu.start()
 
 

@@ -24,4 +24,5 @@ class Wave(Pattern):
 
 
 class Stop(Pattern):
-    pass
+    def __init__(self):
+        super().__init__(0, 0)

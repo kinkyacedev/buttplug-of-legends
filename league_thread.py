@@ -59,14 +59,14 @@ class League_Thread(Thread):
                                         if events[i]["Result"] == "Win":
                                             self.queue.put(Wave(60, 75))
                                     self.queue.put(Wave(duration, intensity))
-                time.sleep(5)
+                time.sleep(0.25)
             except requests.exceptions.ConnectionError:
                 time.sleep(5)
                 name = None
                 last_event = -1
             except KeyError as e:
-                print("ERROR:", e)
-                time.sleep(2)
+                print("ERROR Key:", e)
+                time.sleep(0.25)
             except IndexError as e:
-                print("ERROR", e)
-                time.sleep(2)
+                print("ERROR Index:", e)
+                time.sleep(0.25)
