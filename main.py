@@ -1,6 +1,8 @@
-from buttplug.client import (ButtplugClientWebsocketConnector, ButtplugClient, ButtplugClientDevice, ButtplugClientConnectorError)
+from buttplug.client import (ButtplugClientWebsocketConnector, ButtplugClient, ButtplugClientDevice,
+                             ButtplugClientConnectorError)
 from league_thread import League_Thread
 from buttplug_thread import Buttplug_Thread
+from buttplug_alternatives import CustomWebsocketConnection
 import asyncio
 from queue import SimpleQueue
 
@@ -57,7 +59,7 @@ async def main():
     global client
     global connector
     client = ButtplugClient("League of Legends")
-    connector = ButtplugClientWebsocketConnector("ws://127.0.0.1:12345")
+    connector = CustomWebsocketConnection("ws://127.0.0.1:12345")
     client.device_added_handler += device_added
     client.device_removed_handler += device_removed
     try:
