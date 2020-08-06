@@ -2,6 +2,7 @@ from buttplug.client import (ButtplugClientWebsocketConnector, ButtplugClient, B
 from league_thread import League_Thread
 from buttplug_thread import Buttplug_Thread
 import asyncio
+from queue import SimpleQueue
 
 devices = []
 client: ButtplugClient = None
@@ -65,11 +66,11 @@ async def main():
         print("Could not connect to server, exiting: {}".format(e.message))
         return
     await scan_and_pick_device()
-    lol = League_Thread()
+    queue = SimpleQueue()
+    lol = League_Thread(queue)
     lol.start()
-    bu = Buttplug_Thread()
+    bu = Buttplug_Thread(queue)
     bu.start()
-    
 
 
 if __name__ == "__main__":
