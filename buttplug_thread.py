@@ -1,11 +1,13 @@
 from threading import Thread
 from queue import Queue, Empty
 import time
+from patterns import Pattern
 
 
 class Buttplug_Thread(Thread):
     def __init__(self, queue: Queue):
         self.queue = queue
+        self.patterns = []
         super().__init__()
 
     def run(self):
