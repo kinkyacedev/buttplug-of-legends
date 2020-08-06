@@ -31,7 +31,7 @@ class League_Thread(Thread):
                 if name is None:
                     r = requests.get(url=URL_name, verify=False)
                     name = r.json()
-                print("LOL THREAD:", data)
+                #print("LOL THREAD:", data)
                 events = data["Events"]
                 if last_event == -1:
                     last_event = events[-1]["EventID"]
@@ -39,10 +39,10 @@ class League_Thread(Thread):
                     duration = 15
                     intensity = 35
                 else:
-                    print("LENS:", len(events), last_event)
+                    #print("LENS:", len(events), last_event)
                     if len(events) > last_event+1:
                         for i in range(last_event+1, len(events)):
-                            print("\n\n\n\n")
+                            #print("\n\n\n\n")
                             last_event = i
                             if ("KillerName" in events[i] and events[i]["KillerName"] == name
                                     or "Assisters" in events[i] and name in events[i]["Assisters"]):
@@ -65,8 +65,8 @@ class League_Thread(Thread):
                 name = None
                 last_event = -1
             except KeyError as e:
-                print("ERROR Key:", e)
+                #print("ERROR Key:", e)
                 time.sleep(0.25)
             except IndexError as e:
-                print("ERROR Index:", e)
+                #print("ERROR Index:", e)
                 time.sleep(0.25)

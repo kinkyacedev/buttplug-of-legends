@@ -67,10 +67,18 @@ async def main():
         return
     await scan_and_pick_device()
     queue = SimpleQueue()
+    queue2 = SimpleQueue()
     lol = League_Thread(queue)
     lol.start()
-    bu = Buttplug_Thread(queue, chosen_device)
+    bu = Buttplug_Thread(queue, chosen_device, queue2)
     bu.start()
+    while True:
+        item = queue2.get()
+        print(item)
+        if item == "stop":
+            await chosen_device.send_stop_device_cmd()
+        else:
+            await chosen_device.send_vibrate_cmd(item)
 
 
 if __name__ == "__main__":
