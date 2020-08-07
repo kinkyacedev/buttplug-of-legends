@@ -19,8 +19,9 @@ class Buttplug_Thread(Thread):
             #print(self.patterns)
             try:
                 pattern = self.queue.get_nowait()
-                print("got", pattern)
+                #print("got", pattern)
                 if isinstance(pattern, Stop):
+                    #print("Got stop pattern.")
                     self.patterns.clear()
                     self.queue2.put("stop")
                 else:

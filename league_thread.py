@@ -42,13 +42,15 @@ class League_Thread(Thread):
                     #print("LENS:", len(events), last_event)
                     if len(events) > last_event+1:
                         for i in range(last_event+1, len(events)):
-                            #print("\n\n\n\n")
+                            print("New event", events[i])
                             last_event = i
-                            if ("KillerName" in events[i] and events[i]["KillerName"] == name
+                            if "VictimName" in events[i] and events[i]["VictimName"] == name:
+                                #print("Stopping...")
+                                self.queue.put(Stop())
+                                duration = 15
+                            elif ("KillerName" in events[i] and events[i]["KillerName"] == name
                                     or "Assisters" in events[i] and name in events[i]["Assisters"]):
-                                if "VictimName" in events[i] and events[i]["VictimName"] == name:
-                                    self.queue.put(Stop())
-                                    duration = 15
+                                #print("VictimName" in events[i], events[i]["VictimName"])
                                 if events[i]["EventName"] != "Multikill":
                                     if time.time() - last_time > 15:
                                         intensity = 35
@@ -66,7 +68,9 @@ class League_Thread(Thread):
                 last_event = -1
             except KeyError as e:
                 #print("ERROR Key:", e)
+                name = None
                 time.sleep(0.25)
             except IndexError as e:
                 #print("ERROR Index:", e)
+                name = None
                 time.sleep(0.25)

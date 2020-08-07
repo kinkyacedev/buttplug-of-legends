@@ -29,7 +29,7 @@ def device_removed(emitter, dev_index: ButtplugClientDevice):
     print("Removed " + str(device.name))
     if device == chosen_device:
         print("Removed chosen device")
-        loop = asyncio.get_event_loop
+        loop = asyncio.get_event_loop()
         loop.stop()
 
 
@@ -65,7 +65,7 @@ async def main():
     try:
         await client.connect(connector)
     except ButtplugClientConnectorError as e:
-        print("Could not connect to server, exiting: {}".format(e.message))
+        print("Could not connect to server (check Intiface desktop), exiting: {}".format(e.message))
         return
     await scan_and_pick_device()
     queue = SimpleQueue()
@@ -76,7 +76,7 @@ async def main():
     bu.start()
     while True:
         item = queue2.get()
-        print(item)
+        #print(item)
         if item == "stop":
             await chosen_device.send_stop_device_cmd()
         else:
@@ -90,3 +90,5 @@ if __name__ == "__main__":
         loop.run_until_complete(coro)
     except KeyboardInterrupt:
         print("Received exit, exiting")
+    except RuntimeError:
+        print("Runtime error...")
