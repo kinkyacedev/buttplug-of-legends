@@ -1,3 +1,5 @@
+## This project is no longer maintained, but check for an updated and better version here: https://github.com/Furimanejo/Buttplug-Of-Legends-Unity
+
 # buttplug-of-legends
 Script that interacts with League of Legends and https://buttplug.io
 
